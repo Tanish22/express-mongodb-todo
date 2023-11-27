@@ -2,15 +2,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const config = require('./config');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || config.PORT;
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://tanish:jnF6VBRLRsw8hiaV@nodeazure.se4aiop.mongodb.net/blogDB?retryWrites=true&w=majority', {
+// mongoose.connect('mongodb+srv://tanish:jnF6VBRLRsw8hiaV@nodeazure.se4aiop.mongodb.net/blogDB?retryWrites=true&w=majority', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+mongoose.connect(config.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 
 // Create a mongoose schema and model
 const todoSchema = new mongoose.Schema({
